@@ -1,0 +1,11 @@
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.csprojAssemblyReference.cache
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.AssemblyInfoInputs.cache
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.AssemblyInfo.cs
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\bin\Debug\netcoreapp3.1\Warehouse.deps.json
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\bin\Debug\netcoreapp3.1\Warehouse.dll
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\bin\Debug\netcoreapp3.1\Warehouse.pdb
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\bin\Debug\netcoreapp3.1\Exceptions.dll
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\bin\Debug\netcoreapp3.1\Exceptions.pdb
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.csproj.CopyComplete
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.dll
+C:\Users\Demien\projects\kpi\CourseWork\Warehouse\obj\Debug\netcoreapp3.1\Warehouse.pdb

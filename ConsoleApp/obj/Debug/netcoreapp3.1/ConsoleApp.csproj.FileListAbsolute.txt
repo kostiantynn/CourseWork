@@ -1,0 +1,16 @@
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.exe
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.deps.json
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.runtimeconfig.json
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.runtimeconfig.dev.json
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.dll
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\ConsoleApp.pdb
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\Exceptions.dll
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\Warehouse.dll
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\Warehouse.pdb
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\bin\Debug\netcoreapp3.1\Exceptions.pdb
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.csprojAssemblyReference.cache
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.AssemblyInfo.cs
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.csproj.CopyComplete
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.dll
+C:\Users\Demien\projects\kpi\CourseWork\ConsoleApp\obj\Debug\netcoreapp3.1\ConsoleApp.pdb
