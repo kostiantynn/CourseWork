@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Exceptions;
 
 namespace Warehouse
 {
-    public class Order : Warehouse, IWarehouse
+    public class Order : Warehouse, IWarehouse, IEnumerable
     {
+        
         public Order()
         {
-            Products = new List<Product>();
+            _products = new List<Product>();
         }
 
         public void AddProductsToTheOrder()
@@ -34,7 +36,7 @@ namespace Warehouse
                     {
                         throw new NegativeNumberException("Input number is negative.");
                     }
-                    AddProduct(temp[0], Convert.ToInt32(temp[1]));
+                    AddProduct(new Product(temp[0], Convert.ToInt32(temp[1])));
                 }
                 else
                 {
@@ -43,12 +45,21 @@ namespace Warehouse
             }
 
             Console.WriteLine("Products you've ordered:");
-            ShowExistingProducts(Products);
+            ShowExistingProducts();
         }
 
-        public void AddProduct(string name, int quantityOfProduct)
+        public void AddProduct(Product product)
         {
-            Products.Add(new Product(name, quantityOfProduct));
+            _products.Add(product);
+        }
+        public IEnumerator GetEnumerator()
+        {
+            return _products.GetEnumerator();
+        }
+
+        public bool IsEmpty()
+        {
+            return _products.Count == 0;
         }
     }
 }

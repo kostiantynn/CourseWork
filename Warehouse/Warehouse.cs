@@ -6,15 +6,15 @@ namespace Warehouse
 {
     public abstract class Warehouse
     {
-        public List<Product> Products = new List<Product>();
+        protected List<Product> _products;
 
-        public void ShowExistingProducts(List<Product> products)
+        public void ShowExistingProducts()
         {
-            if (products.Count == 0)
+            if (_products.Count == 0)
                 throw new UnderflowException("Warehouse is empty.");
             
-            foreach (var product in products)
-                Console.WriteLine($"{product.Name} -- {product.QuantityOfProduct}");
+            foreach (var product in _products)
+                Console.WriteLine(product);
             
         }
     }

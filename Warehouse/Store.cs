@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Warehouse
 {
-    public class Store : Warehouse, IWarehouse
+    public sealed class Store : Warehouse, IWarehouse
     {
         
         public delegate void StoreHandler(object sender, StoreHandlerArgs handlerArgs);
@@ -13,40 +13,38 @@ namespace Warehouse
         
         public Store(List<Product> products)
         {
-            Products = products;
-            ShowExistingProducts(Products);
+            _products = products;
         }
 
-        public void AddProduct(string name, int quantityOfProduct)
+        public void AddProduct(Product product)
         {
-            Products += new Product(name, RandomValuation(quantityOfProduct));
-            var orderedProduct = new Product(name, quantityOfProduct);
-            ProductAction?.Invoke(orderedProduct, 
-                new StoreHandlerArgs($"Product \"{orderedProduct.Name}\"" +
-                                     " successfully order, wait until it will be delivered. " 
+            _products += new Product(product.Name, RandomValuation(product.QuantityOfProduct));
+            ProductAction?.Invoke(product, 
+                new StoreHandlerArgs($"Product \"{product.Name}\"" +
+                                     " successfully ordered, wait until it will be delivered. " 
                                      + IWarehouse.TAKE_A_WHILE));
             DeliverTimer(3000);
-            ProductAction?.Invoke(orderedProduct, 
-                new StoreHandlerArgs($"Product \"{orderedProduct.Name}\" " +
-                                     "successfully added to your order."));
-            Products -= orderedProduct;
+            ProductAction?.Invoke(product, 
+                new StoreHandlerArgs($"Product \"{product.Name}\" " +
+                                     "successfully taken from store."));
+            _products -= product;
         }
 
         public void DeleteZeroProduct(Product product)
         {
-            Products.Remove(Products.Find(item => item.Name == product.Name));
+            _products.Remove(_products.Find(item => item.Name == product.Name));
         }
 
         public void TakeOrder(Product product)
         {
             if (IsInStore(product))
             {
-                var indexOfProduct = Products.IndexOf(Products.Find(item => item.Name == product.Name));
-                if (Products[indexOfProduct].QuantityOfProduct >= product.QuantityOfProduct)
+                var indexOfProduct = _products.IndexOf(_products.Find(item => item.Name == product.Name));
+                if (_products[indexOfProduct].QuantityOfProduct >= product.QuantityOfProduct)
                 {
-                    Products -= product;
+                    _products -= product;
                     ProductAction?.Invoke(product,
-                        new StoreHandlerArgs($"Product \"{product.Name}\" successfully added to your order."));
+                        new StoreHandlerArgs($"Product \"{product.Name}\" successfully taken from store."));
                     DeliverTimer(2000);
                 }
                 else
@@ -64,7 +62,7 @@ namespace Warehouse
 
         private bool IsInStore(Product product)
         {
-            return Products.Any(item => item.Name == product.Name);
+            return _products.Any(item => item.Name == product.Name);
         }
 
         private void DeliverTimer(int time)
@@ -75,6 +73,11 @@ namespace Warehouse
         {
             Random random = new Random();
             return random.Next(number + 1, number*2);
+        }
+
+        public bool IsEmpty()
+        {
+            return _products.Count == 0;
         }
     }
 }

@@ -69,5 +69,10 @@ namespace Warehouse
         {
             return products - product;
         }
+
+        public override string ToString()
+        {
+            return $"{Name} -- {QuantityOfProduct}";
+        }
     }
 }
