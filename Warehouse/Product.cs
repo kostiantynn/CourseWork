@@ -6,6 +6,13 @@ namespace Warehouse
     public class Product
     {
         private int _quantityOfProduct;
+
+        public Product(string name, int quantityOfProduct)
+        {
+            Name = name;
+            _quantityOfProduct = quantityOfProduct;
+        }
+
         public string Name { get; }
 
         public int QuantityOfProduct
@@ -13,29 +20,19 @@ namespace Warehouse
             get
             {
                 if (_quantityOfProduct == 0)
-                {
                     throw new NullReferenceException(
                         $"The product {Name} ended in warehouse, but you successfully taken last.");
-                }
 
                 return _quantityOfProduct;
             }
             private set
             {
                 if (value == 0)
-                {
                     throw new NullReferenceException(
                         $"The product {Name} ended in warehouse, but you successfully taken last.");
-                }
 
                 _quantityOfProduct = value;
             }
-        }
-
-        public Product(string name, int quantityOfProduct)
-        {
-            Name = name;
-            _quantityOfProduct = quantityOfProduct;
         }
 
         public static List<Product> operator +(List<Product> products, Product product)
@@ -47,7 +44,7 @@ namespace Warehouse
             }
             catch (Exception)
             {
-               products.Add(product);
+                products.Add(product);
             }
 
             return products;

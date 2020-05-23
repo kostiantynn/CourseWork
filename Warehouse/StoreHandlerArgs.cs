@@ -1,13 +1,12 @@
-﻿
-namespace Warehouse
+﻿namespace Warehouse
 {
     public class StoreHandlerArgs
     {
-        public string Message { get; }
-
         public StoreHandlerArgs(string message)
         {
             Message = message;
         }
+
+        public string Message { get; }
     }
 }

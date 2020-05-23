@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Exceptions;
 
 namespace Warehouse
 {
     public sealed class Store : Warehouse, IWarehouse
     {
-        
         public delegate void StoreHandler(object sender, StoreHandlerArgs handlerArgs);
-        public event StoreHandler ProductAction;
-        
+
         public Store(List<Product> products)
         {
             _products = products;
@@ -19,16 +18,23 @@ namespace Warehouse
         public void AddProduct(Product product)
         {
             _products += new Product(product.Name, RandomValuation(product.QuantityOfProduct));
-            ProductAction?.Invoke(product, 
+            ProductAction?.Invoke(product,
                 new StoreHandlerArgs($"Product \"{product.Name}\"" +
-                                     " successfully ordered, wait until it will be delivered. " 
+                                     " successfully ordered, wait until it will be delivered. "
                                      + IWarehouse.TAKE_A_WHILE));
             DeliverTimer(3000);
-            ProductAction?.Invoke(product, 
+            ProductAction?.Invoke(product,
                 new StoreHandlerArgs($"Product \"{product.Name}\" " +
                                      "successfully taken from store."));
             _products -= product;
         }
+
+        public bool IsEmpty()
+        {
+            return _products.Count == 0;
+        }
+
+        public event StoreHandler ProductAction;
 
         public void DeleteZeroProduct(Product product)
         {
@@ -37,6 +43,8 @@ namespace Warehouse
 
         public void TakeOrder(Product product)
         {
+            if (IsEmpty()) throw new UnderflowException("Store is empty, deliver new products before taking an order.");
+
             if (IsInStore(product))
             {
                 var indexOfProduct = _products.IndexOf(_products.Find(item => item.Name == product.Name));
@@ -55,9 +63,9 @@ namespace Warehouse
             }
             else
             {
-                throw new ArgumentException($"Item \"{product.Name}\" was not found in store. " + IWarehouse.TAKE_A_WHILE);
+                throw new ArgumentException($"Item \"{product.Name}\" was not found in store. " +
+                                            IWarehouse.TAKE_A_WHILE);
             }
-
         }
 
         private bool IsInStore(Product product)
@@ -69,15 +77,11 @@ namespace Warehouse
         {
             Thread.Sleep(time);
         }
+
         private int RandomValuation(int number)
         {
-            Random random = new Random();
-            return random.Next(number + 1, number*2);
-        }
-
-        public bool IsEmpty()
-        {
-            return _products.Count == 0;
+            var random = new Random();
+            return random.Next(number + 1, number * 2);
         }
     }
 }

@@ -4,6 +4,8 @@ namespace Exceptions
 {
     public class NegativeNumberException : ArgumentException
     {
-        public NegativeNumberException(string message) : base(message){}
+        public NegativeNumberException(string message) : base(message)
+        {
+        }
     }
 }

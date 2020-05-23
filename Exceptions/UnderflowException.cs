@@ -4,6 +4,8 @@ namespace Exceptions
 {
     public class UnderflowException : OverflowException
     {
-        public UnderflowException(string message) : base(message) {}
+        public UnderflowException(string message) : base(message)
+        {
+        }
     }
 }
