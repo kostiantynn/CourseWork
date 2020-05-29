@@ -42,7 +42,7 @@ namespace Warehouse
                 var elementIndex = products.IndexOf(products.Find(item => item.Name == product.Name));
                 products[elementIndex].QuantityOfProduct += product.QuantityOfProduct;
             }
-            catch (Exception)
+            catch (ArgumentOutOfRangeException)
             {
                 products.Add(product);
             }
