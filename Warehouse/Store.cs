@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Exceptions;
 
@@ -7,35 +8,27 @@ namespace Warehouse
 {
     public sealed class Store : Warehouse, IWarehouse
     {
-        public delegate void StoreHandler(object sender, StoreHandlerArgs handlerArgs);
+        public Status Status = Status.Free;
 
         public Store(List<Product> products)
         {
             _products = products;
         }
-        public void ShowExistingProducts()
-        {
-            if (IsEmpty())
-            {
-                throw new UnderflowException("Store is empty, deliver new products before taking an order.");
-            }
-            foreach (var product in _products)
-                Console.WriteLine(product);
-        }
 
         public void AddProduct(Product product)
         {
-            _products += new Product(product.Name, RandomValuation(product.QuantityOfProduct));
             ProductAction?.Invoke(product,
                 new StoreHandlerArgs($"Product \"{product.Name}\"" +
-                                     " successfully ordered, wait until it will be delivered. "
-                                     + IWarehouse.TAKE_A_WHILE));
+                                     $" successfully ordered, wait until it will be delivered. {Constants.TakeAWhile}"));
             Task.Run(async delegate
             {
-                await Task.Delay(10000);
+                Status = Status.Delivery;
+                await Task.Delay(Constants.DeliveryTime);
+                _products += new Product(product.Name, RandomValuation(product.QuantityOfProduct));
                 ProductAction?.Invoke(product,
                     new StoreHandlerArgs($"Product \"{product.Name}\" " +
-                                         "successfully ordered from store."));
+                                         "is in your order."));
+                Status = Status.Free;
             });
         }
 
@@ -44,7 +37,13 @@ namespace Warehouse
             return _products.Count == 0;
         }
 
-        public event StoreHandler ProductAction;
+        public event ProductHandler ProductAction;
+
+        public override void ShowExistingProducts()
+        {
+            if (IsEmpty()) throw new UnderflowException(Constants.EmptyStore);
+            base.ShowExistingProducts();
+        }
 
         public void DeleteProductFromStore(Product product)
         {
@@ -58,7 +57,8 @@ namespace Warehouse
 
         public void TakeOrder(Product product)
         {
-            if (IsEmpty()) throw new UnderflowException("Store is empty, deliver new products before taking an order.");
+            if (IsEmpty()) throw new UnderflowException(Constants.EmptyStore);
+            if (Status == Status.Delivery) throw new ThreadStateException("Product hasn't been delivered yet.");
             _products -= product;
             ProductAction?.Invoke(product,
                 new StoreHandlerArgs($"Product \"{product.Name}\" successfully taken from store."));

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Exceptions;
 
@@ -10,15 +9,6 @@ namespace Warehouse
         public Order()
         {
             _products = new List<Product>();
-        }
-        public void ShowExistingProducts()
-        {
-            if (IsEmpty())
-            {
-                throw new UnderflowException("Your order is empty, order something or leave.");
-            }
-            foreach (var product in _products)
-                Console.WriteLine(product);
         }
 
         public IEnumerator GetEnumerator()
@@ -36,31 +26,34 @@ namespace Warehouse
             return _products.Count == 0;
         }
 
-        public void AddProductsToTheOrder(Store store)
+        public event ProductHandler ProductAction;
+
+        public override void ShowExistingProducts()
         {
-            Console.Write("How many products do you want to choose? - ");
-            var order = Console.ReadLine();
-            if (order?.Split('.').Length > 1) throw new FormatException("Floating point number is restricted.");
-            var number = Convert.ToInt32(order) + 1;
-            if (number < 0) throw new NegativeNumberException("Input number is negative.");
-            for (var i = 1; i < number; i++)
+            if (IsEmpty()) throw new UnderflowException(Constants.EmptyOrder);
+            base.ShowExistingProducts();
+        }
+
+        public void AddProductsToTheOrder(Store store, Product newProduct)
+        {
+            if (!store.IsInWarehouse(newProduct) ||
+                store.IsInWarehouse(newProduct) && !store.EnoughQuantity(newProduct))
             {
-                Console.Write($"Write your {i} product name:");
-                var name = Console.ReadLine();
-                if (name?.Length < 1) throw new ArgumentException("You didn't write name of the product.");
-                Console.Write($"Write your {i} product quantity:");
-                var quantity = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
-                if (Convert.ToInt32(quantity) < 0) throw new NegativeNumberException("Input number is negative.");
-                var newProduct = new Product(name, quantity);
-                if (!store.IsInWarehouse(newProduct) || store.IsInWarehouse(newProduct) && !store.EnoughQuantity(newProduct))
+                if (store.Status == Status.Delivery)
+                {
+                    ProductAction?.Invoke(this,
+                        new StoreHandlerArgs($"\"{newProduct.Name}\" is already being delivered."));
+                }
+                else
                 {
                     store.AddProduct(newProduct);
+                    AddProduct(newProduct);
                 }
+            }
+            else
+            {
                 AddProduct(newProduct);
             }
-
-            Console.WriteLine("Products you've ordered:");
-            ShowExistingProducts();
         }
     }
 }
