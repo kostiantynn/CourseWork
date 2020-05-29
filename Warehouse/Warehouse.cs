@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Exceptions;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Warehouse
 {
     public abstract class Warehouse
     {
         protected List<Product> _products;
-
-        public void ShowExistingProducts()
+        
+        internal bool IsInWarehouse(Product product)
         {
-            if (_products.Count == 0)
-                throw new UnderflowException("Warehouse is empty.");
-
-            foreach (var product in _products)
-                Console.WriteLine(product);
+            return _products.Any(item => item.Name == product.Name);
         }
     }
 }

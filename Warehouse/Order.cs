@@ -11,6 +11,15 @@ namespace Warehouse
         {
             _products = new List<Product>();
         }
+        public void ShowExistingProducts()
+        {
+            if (IsEmpty())
+            {
+                throw new UnderflowException("Your order is empty, order something or leave.");
+            }
+            foreach (var product in _products)
+                Console.WriteLine(product);
+        }
 
         public IEnumerator GetEnumerator()
         {
@@ -19,7 +28,7 @@ namespace Warehouse
 
         public void AddProduct(Product product)
         {
-            _products.Add(product);
+            _products += product;
         }
 
         public bool IsEmpty()
@@ -27,7 +36,7 @@ namespace Warehouse
             return _products.Count == 0;
         }
 
-        public void AddProductsToTheOrder()
+        public void AddProductsToTheOrder(Store store)
         {
             Console.Write("How many products do you want to choose? - ");
             var order = Console.ReadLine();
@@ -42,7 +51,12 @@ namespace Warehouse
                 Console.Write($"Write your {i} product quantity:");
                 var quantity = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
                 if (Convert.ToInt32(quantity) < 0) throw new NegativeNumberException("Input number is negative.");
-                AddProduct(new Product(name, quantity));
+                var newProduct = new Product(name, quantity);
+                if (!store.IsInWarehouse(newProduct) || store.IsInWarehouse(newProduct) && !store.EnoughQuantity(newProduct))
+                {
+                    store.AddProduct(newProduct);
+                }
+                AddProduct(newProduct);
             }
 
             Console.WriteLine("Products you've ordered:");

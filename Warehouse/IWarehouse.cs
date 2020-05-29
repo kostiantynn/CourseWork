@@ -6,5 +6,6 @@
 
         public void AddProduct(Product product);
         public bool IsEmpty();
+        public void ShowExistingProducts();
     }
 }

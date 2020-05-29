@@ -7,7 +7,7 @@ namespace ConsoleApp
 {
     internal static class Program
     {
-        public static string menu = "Choose what you will do:\n" +
+        private static string menu = "Choose what you will do:\n" +
                                     "0 - Exit program\n" +
                                     "1 - Add new products to the order\n" +
                                     "2 - Show existing products in warehouse\n" +
@@ -43,8 +43,7 @@ namespace ConsoleApp
                             active = false;
                             break;
                         case 1:
-                            order.AddProductsToTheOrder();
-                            TakeOrderFromStore(order, store);
+                            order.AddProductsToTheOrder(store);
                             break;
                         case 2:
                             store.ShowExistingProducts();
@@ -55,15 +54,16 @@ namespace ConsoleApp
                         case 4:
                             if (order.IsEmpty())
                             {
-                                Console.WriteLine("You didn't make take any product from warehouse.");
+                                Console.WriteLine("You didn't make an order, please make it or leave.");
                                 break;
                             }
-
+                            
+                            TakeOrderFromStore(order, store);
                             Console.WriteLine("Products that left in warehouse");
                             store.ShowExistingProducts();
-                            var exitInput = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
                             Console.WriteLine("Do you want to make a new order?\n");
                             Console.Write("1 - take new order; 2 - Leave: ");
+                            var exitInput = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
                             switch (exitInput)
                             {
                                 case 1:
@@ -111,15 +111,10 @@ namespace ConsoleApp
                 {
                     store.TakeOrder(product);
                 }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                    store.AddProduct(product);
-                }
                 catch (NullReferenceException e)
-                {
-                    Console.WriteLine(e.Message);
-                    store.DeleteZeroProduct(product);
+                {    
+                    Console.WriteLine($"{e.Message}. You successfully taken last.");
+                    store.DeleteProductFromStore(product);
                 }
         }
     }

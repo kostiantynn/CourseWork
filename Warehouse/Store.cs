@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using Exceptions;
 
 namespace Warehouse
@@ -14,6 +13,15 @@ namespace Warehouse
         {
             _products = products;
         }
+        public void ShowExistingProducts()
+        {
+            if (IsEmpty())
+            {
+                throw new UnderflowException("Store is empty, deliver new products before taking an order.");
+            }
+            foreach (var product in _products)
+                Console.WriteLine(product);
+        }
 
         public void AddProduct(Product product)
         {
@@ -22,11 +30,13 @@ namespace Warehouse
                 new StoreHandlerArgs($"Product \"{product.Name}\"" +
                                      " successfully ordered, wait until it will be delivered. "
                                      + IWarehouse.TAKE_A_WHILE));
-            DeliverTimer(3000);
-            ProductAction?.Invoke(product,
-                new StoreHandlerArgs($"Product \"{product.Name}\" " +
-                                     "successfully taken from store."));
-            _products -= product;
+            Task.Run(async delegate
+            {
+                await Task.Delay(10000);
+                ProductAction?.Invoke(product,
+                    new StoreHandlerArgs($"Product \"{product.Name}\" " +
+                                         "successfully ordered from store."));
+            });
         }
 
         public bool IsEmpty()
@@ -36,46 +46,22 @@ namespace Warehouse
 
         public event StoreHandler ProductAction;
 
-        public void DeleteZeroProduct(Product product)
+        public void DeleteProductFromStore(Product product)
         {
             _products.Remove(_products.Find(item => item.Name == product.Name));
+        }
+
+        public bool EnoughQuantity(Product product)
+        {
+            return _products.Find(item => item.Name == product.Name).QuantityOfProduct >= product.QuantityOfProduct;
         }
 
         public void TakeOrder(Product product)
         {
             if (IsEmpty()) throw new UnderflowException("Store is empty, deliver new products before taking an order.");
-
-            if (IsInStore(product))
-            {
-                var indexOfProduct = _products.IndexOf(_products.Find(item => item.Name == product.Name));
-                if (_products[indexOfProduct].QuantityOfProduct >= product.QuantityOfProduct)
-                {
-                    _products -= product;
-                    ProductAction?.Invoke(product,
-                        new StoreHandlerArgs($"Product \"{product.Name}\" successfully taken from store."));
-                    DeliverTimer(2000);
-                }
-                else
-                {
-                    throw new ArgumentException($"Quantity of \"{product.Name}\" is not enough in store. " +
-                                                IWarehouse.TAKE_A_WHILE);
-                }
-            }
-            else
-            {
-                throw new ArgumentException($"Item \"{product.Name}\" was not found in store. " +
-                                            IWarehouse.TAKE_A_WHILE);
-            }
-        }
-
-        private bool IsInStore(Product product)
-        {
-            return _products.Any(item => item.Name == product.Name);
-        }
-
-        private void DeliverTimer(int time)
-        {
-            Thread.Sleep(time);
+            _products -= product;
+            ProductAction?.Invoke(product,
+                new StoreHandlerArgs($"Product \"{product.Name}\" successfully taken from store."));
         }
 
         private int RandomValuation(int number)

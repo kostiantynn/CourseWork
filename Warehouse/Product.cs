@@ -21,7 +21,7 @@ namespace Warehouse
             {
                 if (_quantityOfProduct == 0)
                     throw new NullReferenceException(
-                        $"The product {Name} ended in warehouse, but you successfully taken last.");
+                        $"The product {Name} ended in warehouse.");
 
                 return _quantityOfProduct;
             }
@@ -29,7 +29,7 @@ namespace Warehouse
             {
                 if (value == 0)
                     throw new NullReferenceException(
-                        $"The product {Name} ended in warehouse, but you successfully taken last.");
+                        $"The product {Name} ended in warehouse.");
 
                 _quantityOfProduct = value;
             }
