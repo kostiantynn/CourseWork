@@ -21,7 +21,7 @@ namespace Warehouse
             {
                 if (_quantityOfProduct == 0)
                     throw new NullReferenceException(
-                        $"The product {Name} ended in warehouse.");
+                        $"The product \"{Name}\" ended in warehouse.");
 
                 return _quantityOfProduct;
             }
@@ -29,12 +29,13 @@ namespace Warehouse
             {
                 if (value == 0)
                     throw new NullReferenceException(
-                        $"The product {Name} ended in warehouse.");
+                        $"The product \"{Name}\" ended in warehouse.");
 
                 _quantityOfProduct = value;
             }
         }
 
+        // Operators overriding in purpose of simplifying process of adding/deleting products from list
         public static List<Product> operator +(List<Product> products, Product product)
         {
             try
@@ -66,7 +67,7 @@ namespace Warehouse
         {
             return products - product;
         }
-
+        // Overriding ToString in purpose to correctly represent string representation of Product object
         public override string ToString()
         {
             return $"{Name} -- {QuantityOfProduct}";

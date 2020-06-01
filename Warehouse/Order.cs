@@ -1,51 +1,65 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using Exceptions;
 
 namespace Warehouse
 {
-    public class Order : Warehouse, IWarehouse, IEnumerable
+    public class Order : Warehouse, IWarehouse
     {
         public Order()
         {
             _products = new List<Product>();
         }
-
-        public IEnumerator GetEnumerator()
-        {
-            return _products.GetEnumerator();
-        }
-
+        // Public interface methods implementation
         public void AddProduct(Product product)
         {
             _products += product;
         }
 
-        public bool IsEmpty()
+        public void DeleteProduct(string productName)
         {
-            return _products.Count == 0;
+            if (IsInWarehouse(productName))
+            {
+                ProductAction?.Invoke(this,
+                    new StoreHandlerArgs($"Product \"{productName}\" was removed from your order."));
+                _products.Remove(_products.Find(item => item.Name == productName));
+            }
+            else
+            {
+                throw new ArgumentException($"Product \"{productName}\" was not found in your order.");
+            }
+        }
+
+        // Public method for working with order
+        public int GetSizeOfOrder()
+        {
+            return _products.Count;
         }
 
         public event ProductHandler ProductAction;
 
         public override void ShowExistingProducts()
         {
+            ProductAction?.Invoke(this, new StoreHandlerArgs(Constants.OrderListing));
             if (IsEmpty()) throw new UnderflowException(Constants.EmptyOrder);
             base.ShowExistingProducts();
         }
-
         public void AddProductsToTheOrder(Store store, Product newProduct)
         {
-            if (!store.IsInWarehouse(newProduct) ||
-                store.IsInWarehouse(newProduct) && !store.EnoughQuantity(newProduct))
+            if (!store.IsInWarehouse(newProduct.Name) ||
+                store.IsInWarehouse(newProduct.Name) && !store.EnoughQuantity(newProduct))
             {
-                if (store.Status == Status.Delivery)
+                if (store.DeliveryQueue.IsInWarehouse(newProduct.Name))
                 {
                     ProductAction?.Invoke(this,
-                        new StoreHandlerArgs($"\"{newProduct.Name}\" is already being delivered."));
+                        new StoreHandlerArgs($"\"{newProduct.Name}\" is delivering."));
                 }
                 else
                 {
+                    ProductAction?.Invoke(this,
+                        new StoreHandlerArgs(
+                            $"Product \"{newProduct.Name}\" is not enough in store or it doesn't exist." +
+                            Constants.DeliverSoon));
                     store.AddProduct(newProduct);
                     AddProduct(newProduct);
                 }

@@ -31,6 +31,7 @@
     <e p="C:\Users\Demien\projects\kpi\CourseWork\Warehouse" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
       <e p="Constants.cs" t="Include" />
+      <e p="DeliveryQueue.cs" t="Include" />
       <e p="IWarehouse.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
@@ -43,7 +44,6 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="Product.cs" t="Include" />
       <e p="ProductHandlerArgs.cs" t="Include" />
-      <e p="Status.cs" t="Include" />
       <e p="Store.cs" t="Include" />
       <e p="Warehouse.cs" t="Include" />
       <e p="Warehouse.csproj" t="IncludeRecursive" />

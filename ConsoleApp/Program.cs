@@ -10,10 +10,11 @@ namespace ConsoleApp
     {
         private static readonly string menu = "Choose what you will do:\n" +
                                               "0 - Exit program\n" +
-                                              "1 - Add new products to the order\n" +
+                                              "1 - Add or Delete products from order\n" +
                                               "2 - Show existing products in warehouse\n" +
                                               "3 - Show my order\n" +
-                                              "4 - Take order and leave";
+                                              "4 - Show delivery queue\n" +
+                                              "5 - Take order and leave";
 
         private static void Main()
         {
@@ -45,7 +46,26 @@ namespace ConsoleApp
                             active = false;
                             break;
                         case 1:
-                            AddProductsToTheOrder(store, order);
+                            Console.WriteLine("1 - Add products to the order; 2 - Delete products from order: ");
+                            var addOrDelete = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
+                            switch (addOrDelete)
+                            {
+                                case 1:
+                                    AddProductsToTheOrder(store, order);
+                                    break;
+                                case 2:
+                                    try
+                                    {
+                                        DeleteProductsFromOrder(order);
+                                    }
+                                    catch (ArgumentException e)
+                                    {
+                                        Console.WriteLine(e.Message);
+                                    }
+
+                                    break;
+                            }
+
                             break;
                         case 2:
                             store.ShowExistingProducts();
@@ -54,6 +74,9 @@ namespace ConsoleApp
                             order.ShowExistingProducts();
                             break;
                         case 4:
+                            store.ShowDeliveryQueue();
+                            break;
+                        case 5:
                             if (order.IsEmpty())
                             {
                                 Console.WriteLine("You didn't make an order, please make it or leave.");
@@ -120,7 +143,7 @@ namespace ConsoleApp
                 catch (NullReferenceException e)
                 {
                     Console.WriteLine($"{e.Message}. You successfully taken last.");
-                    store.DeleteProductFromStore(product);
+                    store.DeleteProduct(product.Name);
                 }
         }
 
@@ -141,6 +164,20 @@ namespace ConsoleApp
                 if (Convert.ToInt32(quantity) < 0) throw new NegativeNumberException("Input number is negative.");
                 var newProduct = new Product(name, quantity);
                 order.AddProductsToTheOrder(store, newProduct);
+            }
+        }
+
+        private static void DeleteProductsFromOrder(Order order)
+        {
+            Console.Write("How many products do you want to delete? - ");
+            var countNumber = int.Parse(Console.ReadLine() ?? throw new NullReferenceException());
+            if (countNumber > order.GetSizeOfOrder()) throw new ArgumentException("Size of products is not correct.");
+            for (var i = 1; i < countNumber + 1; i++)
+            {
+                Console.Write($"Write your {i} product name: ");
+                var name = Console.ReadLine();
+                if (name?.Length < 1) throw new ArgumentException("You didn't write name of the product.");
+                order.DeleteProduct(name);
             }
         }
     }
