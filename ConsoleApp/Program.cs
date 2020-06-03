@@ -8,14 +8,6 @@ namespace ConsoleApp
 {
     internal static class Program
     {
-        private static readonly string menu = "Choose what you will do:\n" +
-                                              "0 - Exit program\n" +
-                                              "1 - Add or Delete products from order\n" +
-                                              "2 - Show existing products in warehouse\n" +
-                                              "3 - Show my order\n" +
-                                              "4 - Show delivery queue\n" +
-                                              "5 - Take order and leave";
-
         private static void Main()
         {
             var products = new List<Product>
@@ -38,7 +30,7 @@ namespace ConsoleApp
             while (active)
                 try
                 {
-                    Console.WriteLine(menu);
+                    Console.WriteLine(Constants.menu);
                     var input = Convert.ToInt32(Console.ReadLine());
                     switch (input)
                     {
@@ -140,7 +132,7 @@ namespace ConsoleApp
                 {
                     store.TakeOrder(product);
                 }
-                catch (NullReferenceException e)
+                catch (UnderflowException e)
                 {
                     Console.WriteLine($"{e.Message}. You successfully taken last.");
                     store.DeleteProduct(product.Name);

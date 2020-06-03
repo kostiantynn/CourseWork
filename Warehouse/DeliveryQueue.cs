@@ -3,7 +3,7 @@ using Exceptions;
 
 namespace Warehouse
 {
-    internal class DeliveryQueue : Warehouse, IWarehouse
+    internal sealed class DeliveryQueue : Warehouse, IWarehouse
     {
         internal DeliveryQueue()
         {

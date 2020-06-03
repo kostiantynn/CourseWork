@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Exceptions;
 
 namespace Warehouse
 {
@@ -20,7 +21,7 @@ namespace Warehouse
             get
             {
                 if (_quantityOfProduct == 0)
-                    throw new NullReferenceException(
+                    throw new UnderflowException(
                         $"The product \"{Name}\" ended in warehouse.");
 
                 return _quantityOfProduct;
@@ -28,7 +29,7 @@ namespace Warehouse
             private set
             {
                 if (value == 0)
-                    throw new NullReferenceException(
+                    throw new UnderflowException(
                         $"The product \"{Name}\" ended in warehouse.");
 
                 _quantityOfProduct = value;

@@ -4,7 +4,7 @@ using Exceptions;
 
 namespace Warehouse
 {
-    public class Order : Warehouse, IWarehouse
+    public sealed class Order : Warehouse, IWarehouse
     {
         public Order()
         {

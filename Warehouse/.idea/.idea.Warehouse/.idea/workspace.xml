@@ -10,15 +10,12 @@
       <change beforePath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ConsoleApp/obj/Debug/netcoreapp3.1/ConsoleApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Constants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeliveryQueue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DeliveryQueue.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/IWarehouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/IWarehouse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Status.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Warehouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Warehouse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/Warehouse.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/Warehouse.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/Warehouse.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/Warehouse.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/Warehouse.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/Warehouse.csprojAssemblyReference.cache" afterDir="false" />
@@ -50,16 +47,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Constants.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Exceptions/UnderflowException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../ConsoleApp/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProductHandlerArgs.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/IWarehouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Warehouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Exceptions/NegativeNumberException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DeliveryQueue.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Store.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/07CA2088-9AD9-431E-847A-C96C4E560C9D/66/fc343e9a/02000009pdb.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../ConsoleApp/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProductHandlerArgs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Product.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/IWarehouse.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -81,15 +78,15 @@
         <option value="$PROJECT_DIR$/DeliveryHandlerArgs.cs" />
         <option value="$PROJECT_DIR$/Сonstants.cs" />
         <option value="$PROJECT_DIR$/Status.cs" />
-        <option value="$PROJECT_DIR$/IWarehouse.cs" />
-        <option value="$PROJECT_DIR$/Warehouse.cs" />
-        <option value="$PROJECT_DIR$/../ConsoleApp/Program.cs" />
         <option value="$PROJECT_DIR$/ProductHandlerArgs.cs" />
-        <option value="$PROJECT_DIR$/Constants.cs" />
+        <option value="$PROJECT_DIR$/Product.cs" />
+        <option value="$PROJECT_DIR$/../ConsoleApp/Program.cs" />
+        <option value="$PROJECT_DIR$/IWarehouse.cs" />
         <option value="$PROJECT_DIR$/Store.cs" />
+        <option value="$PROJECT_DIR$/Warehouse.cs" />
+        <option value="$PROJECT_DIR$/Constants.cs" />
         <option value="$PROJECT_DIR$/DeliveryQueue.cs" />
         <option value="$PROJECT_DIR$/Order.cs" />
-        <option value="$PROJECT_DIR$/Product.cs" />
       </list>
     </option>
   </component>
@@ -153,7 +150,9 @@
       <workItem from="1589874967893" duration="9843000" />
       <workItem from="1590221953380" duration="24691000" />
       <workItem from="1590690638535" duration="40853000" />
-      <workItem from="1590945297911" duration="19877000" />
+      <workItem from="1590945297911" duration="48802000" />
+      <workItem from="1591107407044" duration="415000" />
+      <workItem from="1591167930376" duration="499000" />
     </task>
     <servers />
   </component>
@@ -180,25 +179,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="260" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1590996586508" />
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1590996547478">
+    <state width="1493" height="291" key="GridCell.Tab.0.bottom" timestamp="1591168562773">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1590996547478" />
+    <state width="1493" height="291" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1591168562773" />
     <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589715488467" />
-    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1590996547478">
+    <state width="1493" height="291" key="GridCell.Tab.0.center" timestamp="1591168562772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1590996547478" />
+    <state width="1493" height="291" key="GridCell.Tab.0.center/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1591168562772" />
     <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589715488467" />
-    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1590996547477">
+    <state width="1493" height="291" key="GridCell.Tab.0.left" timestamp="1591168562772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1590996547477" />
+    <state width="1493" height="291" key="GridCell.Tab.0.left/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1591168562772" />
     <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589715488466" />
-    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1590996547478">
+    <state width="1493" height="291" key="GridCell.Tab.0.right" timestamp="1591168562772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1590996547478" />
+    <state width="1493" height="291" key="GridCell.Tab.0.right/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1591168562772" />
     <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589715488467" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1589743651673">
       <screen x="0" y="0" width="1536" height="824" />
@@ -280,10 +279,10 @@
     </state>
     <state width="1493" height="261" key="GridCell.Tab.4.right/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1589743651674" />
     <state width="1493" height="261" key="GridCell.Tab.4.right/0.0.1536.824@0.0.1536.824" timestamp="1589712892085" />
-    <state x="420" y="130" key="Rider.ProjectTemplateDialog.Size" timestamp="1589718931515">
+    <state x="420" y="130" key="Rider.ProjectTemplateDialog.Size" timestamp="1591107589033">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="420" y="130" key="Rider.ProjectTemplateDialog.Size/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1589718931515" />
+    <state x="420" y="130" key="Rider.ProjectTemplateDialog.Size/0.0.1536.824/1920.304.1366.728@0.0.1536.824" timestamp="1591107589033" />
     <state x="597" y="88" key="RiderGenerateDialog" timestamp="1590951738676">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
